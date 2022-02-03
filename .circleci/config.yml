@@ -21,7 +21,7 @@ commands:
     steps:
       - when:
           condition:
-            equal: [ "SANDBOX", $<< parameters.my_env_name >> ]
+            equal: [ "FOO", << parameters.my_env_name >> ]
           steps:
             - run: |
                 "hello FOO"
