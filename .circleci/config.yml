@@ -19,12 +19,24 @@ commands:
         type: env_var_name
         default: BAR
     steps:
-      - when:
-          condition:
-            equal: [ "FOO", << parameters.my_env_name >> ]
+      # Unfortunately, we cannot run conditions comparing env vars.
+      # This is because the config parser does not evaluate env vars in conditions.
+#       - when:
+#           condition:
+#             equal: [ "SANDBOX", $<< parameters.my_env_name >> ]
+#           steps:
+#             - run: |
+#                 echo "hello FOO"
+      - run:
           steps:
-            - run: |
-                echo "hello FOO"
+            - run:
+                name: Echo hello only if SANDBOX
+                command: |
+                  # exit early if not SANDBOX
+                  if [ "$<< parameters.my_env_name >>" != "SANDBOX" ]; then
+                      circleci-agent step halt
+                  fi
+                  echo "hello FOO"
 
 jobs:
   cond1:
