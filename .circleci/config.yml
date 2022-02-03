@@ -24,7 +24,7 @@ commands:
             equal: [ "FOO", << parameters.my_env_name >> ]
           steps:
             - run: |
-                "hello FOO"
+                echo "hello FOO"
 
 jobs:
   cond1:
