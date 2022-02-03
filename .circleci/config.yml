@@ -23,7 +23,8 @@ commands:
           condition:
             equal: [ "FOO", $<< parameters.my_env_name >> ]
           steps:
-            - run: "hello FOO"
+            - run: |
+                "hello FOO"
 
 jobs:
   cond1:
