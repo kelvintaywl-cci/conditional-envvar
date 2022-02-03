@@ -28,15 +28,13 @@ commands:
 #             - run: |
 #                 echo "hello FOO"
       - run:
-          steps:
-            - run:
-                name: Echo hello only if SANDBOX
-                command: |
-                  # exit early if not SANDBOX
-                  if [ "$<< parameters.my_env_name >>" != "SANDBOX" ]; then
-                      circleci-agent step halt
-                  fi
-                  echo "hello FOO"
+          name: Echo hello only if SANDBOX
+          command: |
+            # exit early if not SANDBOX
+            if [ "$<< parameters.my_env_name >>" != "SANDBOX" ]; then
+                circleci-agent step halt
+            fi
+            echo "hello FOO"
 
 jobs:
   cond1:
