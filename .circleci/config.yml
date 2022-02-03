@@ -21,7 +21,7 @@ commands:
     steps:
       - when:
           condition:
-            equal: [ "FOO", $<< parameters.my_env_name >> ]
+            equal: [ "SANDBOX", $<< parameters.my_env_name >> ]
           steps:
             - run: |
                 "hello FOO"
@@ -37,7 +37,8 @@ jobs:
       - run:
           name: Diagnose
           command: printenv FOO
-      - try_cond_on_foo
+      - try_cond_on_foo:
+          my_env_name: FOO
           
 
 workflows:
