@@ -48,4 +48,5 @@ jobs:
 workflows:
   demo:
     jobs:
-      - cond1
+      - cond1:
+          env: SANDBOX
