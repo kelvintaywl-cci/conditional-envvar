@@ -29,16 +29,11 @@ commands:
 jobs:
   cond1:
     resource_class: small
-    parameters:
-      env:
-        type: enum
-        enum:
-          - SANDBOX
-          - TEST
     docker:
       - image: cimg/base:stable
     steps:
-      - set_foo_envvar
+      - set_foo_envvar:
+          env: SANDBOX
       - run:
           name: Diagnose
           command: printenv FOO
@@ -48,5 +43,4 @@ jobs:
 workflows:
   demo:
     jobs:
-      - cond1:
-          env: SANDBOX
+      - cond1
